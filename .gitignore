@@ -1,0 +1,21 @@
+# C/C++
+*.exe
+*.o
+*.out
+build/
+
+# Java
+*.class
+
+# Python
+__pycache__/
+*.pyc
+
+# Ada
+*.ali
+
+# Web / general
+node_modules/
+.env
+.vscode/
+.idea/
