@@ -1,0 +1,113 @@
+Microsoft (R) Macro Assembler Version 14.44.35219.0	    10/19/26 18:26:55
+zadanie1.asm						     Page 1 - 1
+
+
+				; program przyk³adowy (wersja 32-bitowa) 
+				.686 
+				.model flat 
+				extern   _ExitProcess@4  : PROC 
+				extern   __write         : PROC   ; (dwa znaki podkreœlenia) 
+				public  _main  
+
+ 00000000			.data 
+ 00000000 0A 4E 61 7A 79	tekst	db 10, 'Nazywam sie Adrian ' , 10  
+	   77 61 6D 20 73
+	   69 65 20 41 64
+	   72 69 61 6E 20
+	   0A
+ 00000015  4D 6F 6A 20 70			db 'Moj pierwszy 32-bitowy program '   
+	   69 65 72 77 73
+	   7A 79 20 33 32
+	   2D 62 69 74 6F
+	   77 79 20 70 72
+	   6F 67 72 61 6D
+	   20
+ 00000034  61 73 65 6D 62			db 'asemblerowy dziala juz poprawnie!', 10  
+	   6C 65 72 6F 77
+	   79 20 64 7A 69
+	   61 6C 61 20 6A
+	   75 7A 20 70 6F
+	   70 72 61 77 6E
+	   69 65 21 0A
+
+ 00000000			.code 
+ 00000000			_main PROC
+
+				; obliczenie sumy wyrazow ciagu 3 + 5 + 7 + 9 + 11
+
+				; obliczenie bez uzycia petli rozkazowej
+ 00000000  B8 00000003			mov	eax, 3	; pierwszy element ciagu
+ 00000005  83 C0 05			add	eax, 5	; dodanie drugiego elementu
+ 00000008  83 C0 07			add	eax, 7	; dodanie trzeciego elementu
+ 0000000B  83 C0 09			add	eax, 9	; dodanie czwartego elementu
+ 0000000E  83 C0 0B			add	eax, 11	; dodanie piatego elementu
+
+				; obliczenie z uzyciem petli rozkazowej
+ 00000011  B8 00000000			mov	eax, 0	; poczatkowa wartosc sumy
+ 00000016  BB 00000003			mov	ebx, 3	; pierwszy element ciagu
+ 0000001B  B9 00000005			mov	ecx, 5	; liczba obiegow petli
+ 00000020  03 C3		ptl:	add	eax, ebx	; dodanie kolejnego elementu
+ 00000022  83 C3 02			add	ebx, 2	; obliczenie nastepnego elementu
+ 00000025  83 E9 01			sub	ecx, 1	; zmniejszenie licznika obiegow petli
+ 00000028  75 F6			jnz	ptl	; skok, gdy licznik obiegow rozny od 0
+
+ 0000002A  B9 00000058			mov	ecx, 88; liczba znakow wyswietlanego tekstu
+				; wywo³anie funkcji ”write” z biblioteki jêzyka C  
+					
+ 0000002F  51				push  ecx      ; liczba znaków wyœwietlanego tekstu  
+ 00000030  68 00000000 R		push  dword PTR OFFSET tekst ; po³o¿enie obszaru         ; ze znakami  
+
+ 00000035  68 00000001			push  dword PTR 1   ; uchwyt urz¹dzenia wyjœciowego  
+ 0000003A  E8 00000000 E		call  __write  ; wyœwietlenie znaków        ; (dwa znaki podkreœlenia _ )  
+					
+ 0000003F  83 C4 0C			add  esp, 12        ; usuniêcie parametrów ze stosu  
+					
+				; zakoñczenie wykonywania programu  
+
+ 00000042  68 00000000			push  dword PTR 0     ; kod powrotu programu   
+ 00000047  E8 00000000 E		call  _ExitProcess@4   
+
+ 0000004C			_main ENDP 
+				END 
+Microsoft (R) Macro Assembler Version 14.44.35219.0	    10/19/26 18:26:55
+zadanie1.asm						     Symbols 2 - 1
+
+
+
+
+Segments and Groups:
+
+                N a m e                 Size     Length   Align   Combine Class
+
+FLAT . . . . . . . . . . . . . .	GROUP
+_DATA  . . . . . . . . . . . . .	32 Bit	 00000056 Para	  Public  'DATA'	
+_TEXT  . . . . . . . . . . . . .	32 Bit	 0000004C Para	  Public  'CODE'	
+
+
+Procedures, parameters, and locals:
+
+                N a m e                 Type     Value    Attr
+
+_main  . . . . . . . . . . . . .	P Near	 00000000 _TEXT	Length= 0000004C Public
+  ptl  . . . . . . . . . . . . .	L Near	 00000020 _TEXT	
+
+
+Symbols:
+
+                N a m e                 Type     Value    Attr
+
+@CodeSize  . . . . . . . . . . .	Number	 00000000h   
+@DataSize  . . . . . . . . . . .	Number	 00000000h   
+@Interface . . . . . . . . . . .	Number	 00000000h   
+@Model . . . . . . . . . . . . .	Number	 00000007h   
+@code  . . . . . . . . . . . . .	Text   	 _TEXT
+@data  . . . . . . . . . . . . .	Text   	 FLAT
+@fardata?  . . . . . . . . . . .	Text   	 FLAT
+@fardata . . . . . . . . . . . .	Text   	 FLAT
+@stack . . . . . . . . . . . . .	Text   	 FLAT
+_ExitProcess@4 . . . . . . . . .	L Near	 00000000 FLAT	External
+__write  . . . . . . . . . . . .	L Near	 00000000 FLAT	External
+tekst  . . . . . . . . . . . . .	Byte	 00000000 _DATA	
+
+	   0 Warnings
+	   0 Errors
