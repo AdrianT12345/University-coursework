@@ -1,0 +1,16 @@
+LEGENDA PARAMETRÓW POZIOMU:
+
+1.  WYS     (int)   - Wysokość mapy
+2.  SZER    (int)   - Szerokość mapy
+3.  CZAS    (int)   - Limit czasu w sekundach
+4.  CEL     (int)   - Ile gwiazdek zebrać, aby wygrać
+5.  WROGOWIE(int)   - Maksymalna liczba łowców na mapie
+6.  HP      (int)   - Startowe życie gracza
+7.  MNOZNIK (float) - Mnożnik punktów na koniec
+8.  KOLOR   (int)   - ID koloru ramki
+9.  G_RATE  (int)   - Co ile klatek nowa gwiazdka
+10. Ł_SEC   (int)   - Co ile sekund nowy łowca
+11. DMG     (int)   - Ile obrażeń zadaje łowca przy uderzeniu
+12. MGLA    (int)   - 0 = brak mgły, 1 = włączona mgła
+13. NAZWA   (txt)   - Nazwa poziomu
+

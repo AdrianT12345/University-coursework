@@ -1,0 +1,4 @@
+wsl
+ls
+g++ main.cpp -o game -lncurses
+./game-
