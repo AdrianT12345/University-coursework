@@ -1,0 +1,5 @@
+﻿  main.cpp
+C:\Users\Adrian\Desktop\template-project-2\main.cpp(404,47): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Adrian\Desktop\template-project-2\main.cpp(408,47): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Adrian\Desktop\template-project-2\main.cpp(412,47): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+  szablon2vs19.vcxproj -> C:\Users\Adrian\Desktop\template-project-2\x64\Debug\szablon2vs19.exe
