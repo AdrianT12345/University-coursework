@@ -1,0 +1,88 @@
+    body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f4f9;
+    color: #333;
+    margin: 0;
+    padding: 20px;
+}
+
+h1, h2, h3 {
+    color: #2c3e50;
+    border-bottom: 2px solid #e74c3c;
+    padding-bottom: 5px;
+}
+
+.kontener {
+    max-width: 1000px;
+    margin: 0 auto;
+    background: white;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    border-radius: 8px;
+}
+
+/* Tabela zawodników */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: #2c3e50;
+    color: white;
+}
+
+tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* Style dla statusów */
+.status-aktywny {
+    color: green;
+    font-weight: bold;
+}
+
+.status-nieaktywny {
+    color: red;
+    font-style: italic;
+}
+
+/* Zdjęcia */
+.profilowe {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 3px solid #eee;
+}
+
+/* Stopka */
+.stopka {
+    margin-top: 40px;
+    font-size: 0.8em;
+    text-align: center;
+    color: #777;
+    border-top: 1px solid #ccc;
+    padding-top: 10px;
+}
+
+a.social-link {
+    display: inline-block;
+    background-color: #3498db;
+    color: white;
+    padding: 5px 10px;
+    text-decoration: none;
+    border-radius: 4px;
+    font-size: 0.9em;
+}
+
+a.social-link:hover {
+    background-color: #2980b9;
+}

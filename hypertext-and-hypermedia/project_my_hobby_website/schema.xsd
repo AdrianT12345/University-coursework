@@ -1,0 +1,311 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="qualified">
+
+
+    <xs:simpleType name="StatusTyp">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="aktywny"/>
+            <xs:enumeration value="kontuzjowany"/>
+            <xs:enumeration value="nieaktywny"/>
+            <xs:enumeration value="zawieszony"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="KodPocztowyTyp">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="\d{2}-\d{3}"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="WzrostTyp">
+        <xs:restriction base="xs:integer">
+            <xs:minInclusive value="100"/>
+            <xs:maxInclusive value="250"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="CenaTyp">
+        <xs:restriction base="xs:decimal">
+            <xs:fractionDigits value="2"/>
+            <xs:minInclusive value="0"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="ListaWynikowTyp">
+        <xs:list itemType="xs:decimal"/>
+    </xs:simpleType>
+    
+    <xs:simpleType name="OstatnieCzasyTyp">
+        <xs:restriction base="ListaWynikowTyp">
+            <xs:minLength value="0"/>
+            <xs:maxLength value="10"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="MiejsceLiczboweTyp">
+        <xs:restriction base="xs:positiveInteger">
+            <xs:maxInclusive value="1000"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="StatusRankinguTyp">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="Niesklasyfikowany"/>
+            <xs:enumeration value="DSQ"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="RankingTyp">
+        <xs:union memberTypes="MiejsceLiczboweTyp StatusRankinguTyp"/>
+    </xs:simpleType>
+
+    <xs:simpleType name="KrotkiTekstTyp">
+        <xs:restriction base="xs:string">
+            <xs:maxLength value="50"/>
+            <xs:minLength value="2"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+
+    <xs:group name="GrupaAdresowa">
+        <xs:sequence>
+            <xs:element name="Ulica" type="xs:string"/>
+            <xs:element name="KodPocztowy" type="KodPocztowyTyp"/>
+            <xs:element name="Miasto" type="xs:string"/>
+        </xs:sequence>
+    </xs:group>
+
+    <xs:attribute name="id" type="xs:ID"/>
+
+
+    <xs:complexType name="AdresTyp">
+        <xs:group ref="GrupaAdresowa"/>
+    </xs:complexType>
+
+    <xs:complexType name="AutorTyp">
+        <xs:sequence>
+            <xs:element name="Imie" type="KrotkiTekstTyp"/>
+            <xs:element name="Nazwisko" type="KrotkiTekstTyp"/>
+            <xs:element name="Indeks" type="xs:string" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="DaneOsoboweTyp">
+        <xs:sequence>
+            <xs:element name="Imie" type="KrotkiTekstTyp"/>
+            <xs:element name="Nazwisko" type="KrotkiTekstTyp"/>
+            <xs:element name="DataUrodzenia" type="xs:date" minOccurs="0"/>
+            <xs:element name="Plec">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:pattern value="[KM]"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="BiografiaTyp" mixed="true">
+        <xs:sequence>
+            <xs:element name="Wyroznienie" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="ParametrTyp">
+        <xs:simpleContent>
+            <xs:extension base="xs:decimal">
+                <xs:attribute name="jednostka" type="xs:string" use="required"/>
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+
+    <xs:complexType name="ZdjecieTyp">
+        <xs:complexContent>
+            <xs:restriction base="xs:anyType">
+                <xs:attribute name="url" type="xs:anyURI" use="required"/>
+                <xs:attribute name="format" type="xs:string"/>
+            </xs:restriction>
+        </xs:complexContent>
+    </xs:complexType>
+    
+    <xs:complexType name="ZdjecieZOpisemTyp">
+        <xs:simpleContent>
+            <xs:extension base="xs:string">
+                <xs:attribute name="url" type="xs:anyURI" use="required"/>
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+
+
+    <xs:element name="ZdjecieProfilowe" type="ZdjecieTyp"/>
+
+    <xs:element name="PortalLekkoatletyczny">
+        <xs:complexType>
+            <xs:sequence>
+                
+                <xs:element name="Naglowek">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="Autor" type="AutorTyp"/>
+                            <xs:element name="Temat" type="xs:string"/>
+                            <xs:element name="Opis" type="xs:string"/>
+                            <xs:element name="WersjaProjektu" type="xs:string"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+
+                <xs:element name="ZwiazekSportowy">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="NazwaPelna" type="xs:string"/>
+                            <xs:element name="Adres" type="AdresTyp"/>
+                            <xs:element name="Kontakt" type="xs:string"/>
+                            <xs:element name="StronaOficjalna" type="xs:anyURI"/>
+                        </xs:sequence>
+                        <xs:attribute name="kraj" type="xs:string" default="Polska"/>
+                    </xs:complexType>
+                </xs:element>
+
+                <xs:element name="Kluby">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="Klub" maxOccurs="unbounded">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element name="Nazwa" type="xs:string"/>
+                                        <xs:element name="DataZalozenia" type="xs:date"/>
+                                        
+                                        <xs:element name="Sekcja" maxOccurs="unbounded">
+                                            <xs:complexType>
+                                                <xs:sequence>
+                                                    <xs:element name="Kierownik" type="xs:string"/>
+                                                    <xs:element name="Zawodnicy">
+                                                        <xs:complexType>
+                                                            <xs:sequence>
+                                                                
+                                                                <xs:element name="Zawodnik" maxOccurs="unbounded">
+                                                                    <xs:complexType>
+                                                                        <xs:sequence>
+                                                                            <xs:element name="DaneOsobowe" type="DaneOsoboweTyp"/>
+                                                                            <xs:element name="Biografia" type="BiografiaTyp"/>
+                                                                            
+                                                                            <xs:element name="ParametryFizyczne">
+                                                                                <xs:complexType>
+                                                                                    <xs:sequence>
+                                                                                        <xs:element name="Wzrost" type="ParametrTyp"/>
+                                                                                        <xs:element name="Waga" type="ParametrTyp"/>
+                                                                                    </xs:sequence>
+                                                                                </xs:complexType>
+                                                                            </xs:element>
+
+                                                                            <xs:element name="Osiagniecia">
+                                                                                <xs:complexType>
+                                                                                    <xs:sequence>
+                                                                                        <xs:element name="RankingKrajowy" type="RankingTyp"/>
+                                                                                        
+                                                                                        <xs:element name="OstatnieCzasy">
+                                                                                            <xs:complexType>
+                                                                                                <xs:simpleContent>
+                                                                                                    <xs:extension base="OstatnieCzasyTyp">
+                                                                                                        <xs:attribute name="format" type="xs:string"/>
+                                                                                                    </xs:extension>
+                                                                                                </xs:simpleContent>
+                                                                                            </xs:complexType>
+                                                                                        </xs:element>
+                                                                                        
+                                                                                        <xs:element name="Rekordy" minOccurs="0">
+                                                                                            <xs:complexType>
+                                                                                                <xs:sequence>
+                                                                                                    <xs:element name="RekordDystans" maxOccurs="unbounded">
+                                                                                                        <xs:complexType>
+                                                                                                            <xs:sequence>
+                                                                                                                <xs:element name="Wynik" type="xs:decimal"/>
+                                                                                                                <xs:element name="Data" type="xs:date"/>
+                                                                                                                <xs:element name="Miejsce" type="xs:string"/>
+                                                                                                            </xs:sequence>
+                                                                                                            <xs:attribute name="dystans" type="xs:string"/>
+                                                                                                            <xs:attribute name="hala" type="xs:string"/>
+                                                                                                        </xs:complexType>
+                                                                                                    </xs:element>
+                                                                                                </xs:sequence>
+                                                                                            </xs:complexType>
+                                                                                        </xs:element>
+                                                                                    </xs:sequence>
+                                                                                </xs:complexType>
+                                                                            </xs:element>
+
+                                                                            <xs:element name="Multimedia">
+                                                                                <xs:complexType>
+                                                                                    <xs:sequence>
+                                                                                        <xs:element ref="ZdjecieProfilowe"/>
+                                                                                        <xs:element name="Galeria">
+                                                                                            <xs:complexType>
+                                                                                                <xs:sequence>
+                                                                                                    <xs:element name="Zdjecie" type="ZdjecieZOpisemTyp" maxOccurs="unbounded"/>
+                                                                                                </xs:sequence>
+                                                                                            </xs:complexType>
+                                                                                        </xs:element>
+                                                                                        <xs:element name="SocialMedia" minOccurs="0">
+                                                                                            <xs:complexType>
+                                                                                                <xs:simpleContent>
+                                                                                                    <xs:extension base="xs:anyURI">
+                                                                                                        <xs:attribute name="platforma" type="xs:string"/>
+                                                                                                    </xs:extension>
+                                                                                                </xs:simpleContent>
+                                                                                            </xs:complexType>
+                                                                                        </xs:element>
+                                                                                    </xs:sequence>
+                                                                                </xs:complexType>
+                                                                            </xs:element>
+
+                                                                        </xs:sequence>
+                                                                        <xs:attribute ref="id" use="required"/>
+                                                                        <xs:attribute name="status" type="StatusTyp" use="optional"/>
+                                                                    </xs:complexType>
+                                                                </xs:element> 
+
+                                                            </xs:sequence>
+                                                        </xs:complexType>
+                                                    </xs:element>
+                                                </xs:sequence>
+                                                <xs:attribute name="nazwa" type="xs:string" use="required"/>
+                                            </xs:complexType>
+                                        </xs:element>
+
+                                    </xs:sequence>
+                                    <xs:attribute ref="id"/>
+                                    <xs:attribute name="licencja" type="xs:string"/>
+                                    <xs:attribute name="typ" type="xs:string"/>
+                                </xs:complexType>
+                            </xs:element>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+
+                <xs:element name="Bilety">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="Bilet" maxOccurs="unbounded">
+                                <xs:complexType>
+                                    <xs:simpleContent>
+                                        <xs:extension base="xs:string">
+                                            <xs:attribute name="typ" type="xs:string"/>
+                                            <xs:attribute name="cena" type="CenaTyp"/>
+                                            <xs:attribute name="waluta" type="xs:string" fixed="PLN"/>
+                                        </xs:extension>
+                                    </xs:simpleContent>
+                                </xs:complexType>
+                            </xs:element>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+
+            </xs:sequence>
+        </xs:complexType>
+        
+        <xs:key name="KluczZawodnikID">
+            <xs:selector xpath=".//Kluby/Klub/Sekcja/Zawodnicy/Zawodnik"/>
+            <xs:field xpath="@id"/>
+        </xs:key>
+
+    </xs:element>
+
+</xs:schema>

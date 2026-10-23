@@ -1,0 +1,92 @@
+
+<!ENTITY % atrybutyZdjecia "url CDATA #REQUIRED format (jpg|png|gif) 'jpg'">
+
+<!ENTITY % elementAdres "Adres">
+
+<!ELEMENT PortalLekkoatletyczny (Naglowek, ZwiazekSportowy, Kluby, Bilety)>
+
+<!ELEMENT Naglowek (Autor, Temat, Opis, WersjaProjektu)>
+<!ELEMENT Autor (Imie, Nazwisko, Indeks?)>
+<!ELEMENT Imie (#PCDATA)>
+<!ELEMENT Nazwisko (#PCDATA)>
+<!ELEMENT Indeks (#PCDATA)>
+<!ELEMENT Temat (#PCDATA)>
+<!ELEMENT Opis (#PCDATA)>
+<!ELEMENT WersjaProjektu (#PCDATA)>
+
+<!ELEMENT ZwiazekSportowy (NazwaPelna, %elementAdres;, Kontakt, StronaOficjalna)>
+<!ATTLIST ZwiazekSportowy kraj CDATA "Polska"> 
+
+<!ELEMENT NazwaPelna (#PCDATA)>
+<!ELEMENT Kontakt (#PCDATA)>
+<!ELEMENT StronaOficjalna (#PCDATA)>
+
+<!ELEMENT Adres (Ulica, KodPocztowy, Miasto)>
+<!ELEMENT Ulica (#PCDATA)>
+<!ELEMENT KodPocztowy (#PCDATA)>
+<!ELEMENT Miasto (#PCDATA)>
+
+<!ELEMENT Kluby (Klub+)> 
+<!ELEMENT Klub (Nazwa, DataZalozenia, Sekcja*)> 
+<!ATTLIST Klub 
+    id ID #REQUIRED
+    licencja CDATA #IMPLIED
+    typ (akademicki|miejski|wojskowy) "miejski"> 
+
+<!ELEMENT Nazwa (#PCDATA)>
+<!ELEMENT DataZalozenia (#PCDATA)>
+
+<!ELEMENT Sekcja (Kierownik, Zawodnicy)>
+<!ATTLIST Sekcja nazwa CDATA #REQUIRED>
+<!ELEMENT Kierownik (#PCDATA)>
+
+<!ELEMENT Zawodnicy (Zawodnik*)>
+<!ELEMENT Zawodnik (DaneOsobowe, Biografia, ParametryFizyczne, Osiagniecia, Multimedia)>
+<!ATTLIST Zawodnik 
+    id ID #REQUIRED
+    status (aktywny|kontuzjowany|nieaktywny) "aktywny">
+
+<!ELEMENT DaneOsobowe (Imie, Nazwisko, DataUrodzenia?, Plec)>
+<!ELEMENT DataUrodzenia (#PCDATA)>
+<!ELEMENT Plec (#PCDATA)>
+
+<!ELEMENT Biografia (#PCDATA | Wyroznienie)*>
+<!ELEMENT Wyroznienie (#PCDATA)>
+
+<!ELEMENT ParametryFizyczne (Wzrost, Waga)>
+<!ELEMENT Wzrost (#PCDATA)>
+<!ATTLIST Wzrost jednostka CDATA #FIXED "cm">
+<!ELEMENT Waga (#PCDATA)>
+<!ATTLIST Waga jednostka CDATA #FIXED "kg">
+
+<!ELEMENT Osiagniecia (RankingKrajowy, OstatnieCzasy, Rekordy?)>
+<!ELEMENT RankingKrajowy (#PCDATA)>
+<!ELEMENT OstatnieCzasy (#PCDATA)>
+<!ATTLIST OstatnieCzasy format CDATA #IMPLIED>
+
+<!ELEMENT Rekordy (RekordDystans*)>
+<!ELEMENT RekordDystans (Wynik, Data, Miejsce)>
+<!ATTLIST RekordDystans 
+    dystans CDATA #REQUIRED
+    hala (tak|nie) "nie">
+<!ELEMENT Wynik (#PCDATA)>
+<!ELEMENT Data (#PCDATA)>
+<!ELEMENT Miejsce (#PCDATA)>
+
+<!ELEMENT Multimedia (ZdjecieProfilowe, Galeria, SocialMedia?)>
+<!ELEMENT ZdjecieProfilowe EMPTY>
+<!ATTLIST ZdjecieProfilowe %atrybutyZdjecia;>
+
+<!ELEMENT Galeria (Zdjecie*)>
+<!ELEMENT Zdjecie (#PCDATA)> 
+<!ATTLIST Zdjecie %atrybutyZdjecia;>
+
+<!ELEMENT SocialMedia (#PCDATA)>
+<!ATTLIST SocialMedia platforma CDATA #REQUIRED>
+
+<!ELEMENT Bilety (Bilet+)>
+<!ELEMENT Bilet (#PCDATA)>
+<!ATTLIST Bilet 
+    typ CDATA #IMPLIED
+    cena CDATA #REQUIRED
+    waluta CDATA #FIXED "PLN">

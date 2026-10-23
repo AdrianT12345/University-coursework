@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE PortalLekkoatletyczny SYSTEM "definicje.dtd">
+
+<PortalLekkoatletyczny>
+    
+    <Naglowek>
+        <Autor>
+            <Imie>Adrian</Imie>
+            <Nazwisko>Trojak</Nazwisko>
+            <Indeks>208249</Indeks>
+        </Autor>
+        <Temat>Lekkoatletyka - Królowa Sportu</Temat>
+        <Opis>Projekt bazy danych opisujący struktury klubowe.</Opis>
+        <WersjaProjektu>Finalna</WersjaProjektu>
+    </Naglowek>
+
+    <ZwiazekSportowy kraj="Polska">
+        <NazwaPelna>Polski Związek Lekkiej Atletyki</NazwaPelna>
+        <Adres>
+            <Ulica>Mickiewicza 12</Ulica>
+            <KodPocztowy>01-100</KodPocztowy>
+            <Miasto>Warszawa</Miasto>
+        </Adres>
+        <Kontakt>biuro@pzla.pl</Kontakt>
+        <StronaOficjalna>https://www.pzla.pl</StronaOficjalna>
+    </ZwiazekSportowy>
+
+    <Kluby>
+        <Klub id="K-01" licencja="KL-2024-WAR" typ="akademicki">
+            <Nazwa>AZS AWF Warszawa</Nazwa>
+            <DataZalozenia>1949-05-12</DataZalozenia>
+            
+            <Sekcja nazwa="Sprint">
+                <Kierownik>Jan Kowalski</Kierownik>
+                <Zawodnicy>
+                    <Zawodnik id="Z-101" status="aktywny">
+                        <DaneOsobowe>
+                            <Imie>Ewa</Imie>
+                            <Nazwisko>Swoboda</Nazwisko>
+                            <DataUrodzenia>1997-07-26</DataUrodzenia>
+                            <Plec>K</Plec>
+                        </DaneOsobowe>
+                        
+                        <Biografia>
+                            Specjalistka od biegów na krótkich dystansach. 
+                            Wielokrotna <Wyroznienie>mistrzyni kraju</Wyroznienie> oraz medalistka.
+                        </Biografia>
+
+                        <ParametryFizyczne>
+                            <Wzrost jednostka="cm">164</Wzrost>
+                            <Waga jednostka="kg">55</Waga>
+                        </ParametryFizyczne>
+
+                        <Osiagniecia>
+                            <RankingKrajowy>1</RankingKrajowy>
+                            <OstatnieCzasy format="s">11.05 10.99 11.02 11.15</OstatnieCzasy>
+                            <Rekordy>
+                                <RekordDystans dystans="60m" hala="tak">
+                                    <Wynik>6.99</Wynik>
+                                    <Data>2022-03-05</Data>
+                                    <Miejsce>Torun</Miejsce>
+                                </RekordDystans>
+                            </Rekordy>
+                        </Osiagniecia>
+                        
+                        <Multimedia>
+                            <ZdjecieProfilowe format="jpg" url="https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/Ewa_Swoboda_2024.jpg/600px-Ewa_Swoboda_2024.jpg"/>
+                            <Galeria>
+                                <Zdjecie url="https://placehold.co/600x400?text=Start">Start z bloków</Zdjecie>
+                            </Galeria>
+                            <SocialMedia platforma="Instagram">https://instagram.com/ewa_swoboda</SocialMedia>
+                        </Multimedia>
+                    </Zawodnik>
+                </Zawodnicy>
+            </Sekcja>
+        </Klub>
+
+        <Klub id="K-02" licencja="KL-2024-POD" typ="miejski">
+            <Nazwa>Podlasie Białystok</Nazwa>
+            <DataZalozenia>1970-01-01</DataZalozenia>
+            <Sekcja nazwa="Rzuty">
+                <Kierownik>Marek Rzepkowski</Kierownik>
+                <Zawodnicy>
+                    <Zawodnik id="Z-999" status="nieaktywny">
+                        <DaneOsobowe>
+                            <Imie>Jan</Imie>
+                            <Nazwisko>Testowy</Nazwisko>
+                            <DataUrodzenia>2000-01-01</DataUrodzenia>
+                            <Plec>M</Plec>
+                        </DaneOsobowe>
+                        <Biografia>Zawodnik testowy.</Biografia>
+                        <ParametryFizyczne>
+                            <Wzrost jednostka="cm">180</Wzrost>
+                            <Waga jednostka="kg">75</Waga>
+                        </ParametryFizyczne>
+                        <Osiagniecia>
+                            <RankingKrajowy>Niesklasyfikowany</RankingKrajowy>
+                            <OstatnieCzasy format="m">0.0</OstatnieCzasy> 
+                        </Osiagniecia>
+                        <Multimedia>
+                            <ZdjecieProfilowe format="jpg" url="https://placehold.co/400x400?text=Brak"/>
+                            <Galeria>
+                                <Zdjecie url="https://placehold.co/600x400?text=Pusto">Brak zdjęć</Zdjecie>
+                            </Galeria>
+                            <SocialMedia platforma="Brak">https://brak.pl</SocialMedia>
+                        </Multimedia>
+                    </Zawodnik>
+                </Zawodnicy>
+            </Sekcja>
+        </Klub>
+    </Kluby>
+
+    <Bilety>
+        <Bilet typ="ulgowy" cena="20.00" waluta="PLN">Wejściówka</Bilet>
+        <Bilet typ="normalny" cena="40.00" waluta="PLN">Wejściówka</Bilet>
+    </Bilety>
+
+</PortalLekkoatletyczny>
